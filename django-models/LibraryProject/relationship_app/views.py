@@ -1,13 +1,23 @@
-from django.shortcuts import render
 from django.views.generic.detail import DetailView
 
 # Create your views here.
-from .models import Book
-from .models import Library
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from .models import Book
+from .models import Library
 
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Log in the user after successful registration
+            return redirect("home")  # Redirect to a homepage or other view
+    else:
+        form = UserCreationForm()
+
+    return render(request, "relationship_app/register.html", {"form": form})
 
 def list_books(request):
     # Add your logic for fetching and rendering books
@@ -32,14 +42,4 @@ class BookDetailView(DetailView):
         book = self.get_object()  # Retrieve the current book instance
         context['average_rating'] = book.get_average_rating() 
 
-def register(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # Log in the user after successful registration
-            return redirect("home")  # Redirect to a homepage or other view
-    else:
-        form = UserCreationForm()
 
-    return render(request, "relationship_app/register.html", {"form": form})
