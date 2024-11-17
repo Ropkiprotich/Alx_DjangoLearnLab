@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
+
 def list_books(request):
     # Add your logic for fetching and rendering books
     books = []  # Replace with actual query, e.g., Book.objects.all()
@@ -42,4 +43,3 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, "relationship_app/register.html", {"form": form})
-
