@@ -2,13 +2,15 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def list_books(request):
-    return render(request, "relationship_app/list_books.html")
+
 
 from .models import Book
 from django.views.generic import DetailView
 from .models import Book
 from .models import Library
+
+def list_books(request):
+    return render(request, "relationship_app/list_books.html")
 
 def book_list(request):
     """Retrieves all books and renders a template displaying the list."""
