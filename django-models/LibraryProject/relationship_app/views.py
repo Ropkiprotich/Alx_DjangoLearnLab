@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from .models import Book
 from .models import Library
 
+
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
