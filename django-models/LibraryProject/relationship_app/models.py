@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Create your models here.
 class Author(models.Model):
     name = models.CharField(max_length=100)
@@ -26,9 +27,16 @@ class Library(models.Model):
 class Librarian(models.Model):
     name = models.CharField(max_length=100)
     library = models.OneToOneField(Library, on_delete = models.CASCADE)
+
     def __str__(self):
-        return self.name 
+        return self.name
     
+class Meta:
+        permissions = [
+            ("view_admin", "Can view admin dashboard"),
+            ("manage_librarians", "Can manage librarians"),
+            ("access_member_content", "Can access member content"),
+        ]
 
 class UserProfile(models.Model):
     ROLE_CHOICES = [

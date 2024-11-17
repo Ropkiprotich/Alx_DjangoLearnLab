@@ -44,3 +44,9 @@ class BookDetailView(DetailView):
         context['average_rating'] = book.get_average_rating() 
 
 
+from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render
+
+@permission_required('relationship_app.view_admin', raise_exception=True)
+def admin_dashboard(request):
+    return render(request, 'admin_dashboard.html')
