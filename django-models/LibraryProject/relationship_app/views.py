@@ -4,6 +4,8 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from .models import Book
+from .models import Library
 
 def register(request):
     if request.method == "POST":
@@ -16,7 +18,6 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, "relationship_app/register.html", {"form": form})
-    
 
 def list_books(request):
     # Add your logic for fetching and rendering books
