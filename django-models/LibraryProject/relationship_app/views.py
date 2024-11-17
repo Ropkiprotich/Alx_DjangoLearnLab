@@ -1,6 +1,10 @@
 from django.shortcuts import render
 
 # Create your views here.
+
+def list_books(request):
+    return render(request, "relationship_app/list_books.html")
+
 from .models import Book
 from django.views.generic import DetailView
 from .models import Book
