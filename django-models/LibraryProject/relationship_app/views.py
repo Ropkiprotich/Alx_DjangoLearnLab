@@ -15,6 +15,18 @@ def book_list(request):
     books = Book.objects.all()  # Fetch all book instances from the database
     context = {'book_list': books}  # Create a context dictionary with book list
     return render(request, 'books/book_list.html', context)
+
+def library_detail(request):
+    # Sample context data, replace with your actual logic
+    context = {
+        "library": {
+            "name": "Central Library",
+            "location": "Downtown",
+            "books": 1200,
+        }
+    }
+    return render(request, "relationship_app/library_detail.html", context)
+
 class BookDetailView(DetailView):
     """A class-based view for displaying details of a specific book."""
     model = Book
