@@ -2,6 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import UserProfile
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
+from relationship_app.models import UserProfile
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -9,9 +12,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'role')  # Add search functionality by username and role
     list_filter = ('role',)  # Add a filter by role
 
-from django.contrib.auth.models import User, Permission
-from django.contrib.contenttypes.models import ContentType
-from relationship_app.models import UserProfile
 
 # Assign 'view_admin' permission to a user
 user = User.objects.get(username='admin_user')

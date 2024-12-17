@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
@@ -59,3 +60,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
+
+
+class CustomUser(AbstractUser):
+    date_of_birth = models.DateField(blank=True, null=True, verbose_name="DOB")
+    profile_photo = models.ImageField(upload_to='profile_photos/')
+    # ... additional fields as needed ...
