@@ -1,4 +1,4 @@
-"""from django.http import HttpResponse
+from django.http import HttpResponse
 from django.urls import path
 from . import views
 
@@ -7,4 +7,4 @@ def index(request):
 
 urlpatterns = [
     path("", views.index, name="index"),
-]"""
+]
