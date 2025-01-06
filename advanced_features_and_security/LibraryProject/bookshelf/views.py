@@ -12,5 +12,7 @@ class BookDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'bookshelf.can_view'
     template_name = 'book_detail.html'
     raise_exception = True
+
+    bookshelf__list = 'book_list'
 def index(request):
      return HttpResponse('Welcome to my bookshelf.')
