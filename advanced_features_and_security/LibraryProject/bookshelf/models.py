@@ -3,7 +3,8 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
-
+from bookshelf.models import Book
+from django.contrib.auth.models import User, Permission
 
 class Book(models.Model):
     title = models.CharField(max_length = 200)
@@ -37,4 +38,12 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
 
         return self.create_user(username, email, password, **extra_fields)
+    
 
+class Meta:
+        permissions = [
+            ("can_view", "Can view book details"),
+            ("can_create", "Can create new book"),
+            ("can_edit", "Can edit book"),
+            ("can_delete", "Can delete book"),
+        ]
