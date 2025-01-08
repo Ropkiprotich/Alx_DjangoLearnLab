@@ -1,31 +1,22 @@
 from django import forms
-from .models import Book
 
-class BookSearchForm(forms.Form):
+class ExampleForm(forms.Form):
     title = forms.CharField(
-        max_length=100,
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Search by title'})
+        max_length=200,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter book title'})
     )
     author = forms.CharField(
         max_length=100,
-        required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Search by author'})
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter author name'})
     )
-
-class BookForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ['title', 'author', 'publication_date', 'isbn']
-        widgets = {
-            'publication_date': forms.DateInput(attrs={'type': 'date'}),
-        }
-        labels = {
-            'isbn': 'ISBN Number',
-        }
-
-    def clean_isbn(self):
-        isbn = self.cleaned_data['isbn']
-        if not isbn.isdigit() or len(isbn) != 13:
-            raise forms.ValidationError("ISBN must be a 13-digit numeric value.")
-        return isbn
+    publication_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
+    )
+    isbn = forms.CharField(
+        max_length=13,
+        required=False,
+        help_text="Optional. Enter a 13-digit ISBN."
+    )
