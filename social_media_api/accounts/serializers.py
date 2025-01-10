@@ -25,7 +25,7 @@ class CustomObtainAuthToken(ObtainAuthToken):
         response = super().post(request, *args, **kwargs)
         Token.objects.create
         token = Token.objects.get(key=response.data['token'])
-        user = token.user
+        user = token.get_user_model().objects.create_user
         return Response({'token': token.key, 'user_id': user.pk, 'username': user.username})
 
 class UserProfileView(generics.RetrieveUpdateAPIView):
@@ -35,3 +35,4 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+  
