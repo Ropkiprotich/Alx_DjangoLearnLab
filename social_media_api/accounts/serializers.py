@@ -23,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
+        Token.objects.create
         token = Token.objects.get(key=response.data['token'])
         user = token.user
         return Response({'token': token.key, 'user_id': user.pk, 'username': user.username})
